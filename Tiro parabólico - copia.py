@@ -1,3 +1,10 @@
+# A00826973 Ingrid Giselle Paz Ramírez
+# A00827533 Leo Abraham Puente Rangel
+# Programa de un juego que consiste en lanzar bolas
+# pequeñas que deben impactar en otras más grandes
+# para desaparecerlas
+# Fecha de entrega: 30/10/2020
+
 from random import randrange
 from turtle import *
 from freegames import vector
