@@ -12,54 +12,44 @@ from freegames import vector
 
 # Define donde inicia el proyectil que es lanzado
 ball = vector(-200, -200)
-<<<<<<< HEAD
 # Inicialmente el proyectil no tiene velocidad
 speed = vector(0, 0)
-# Conjunto vacío de objetivos
-=======
-#Posición de la pelota
-speed = vector(0, 0)
-#Velocidad
->>>>>>> 753f53fccf1720cc784e12441de4087de3a9ad36
+# Puntos objetivo
 targets = []
-#Puntos objetivo
 
 # Se muestra la entrada y cálculo de la velocidad
 # tomando en cuenta donde pulsa sobre la pantalla
 # el jugador
 def tap(x, y):
-     #La velocidad depende del lugar en el que toque la pantalla
+     # La velocidad depende del lugar en el que toque la pantalla
     "Respond to screen tap."
     if not inside(ball):
         ball.x = -199
-        #Velocidad inicial x
+        # Punto partida x
         ball.y = -199
-        #Velocidad inicial y
+        # Punto partida y
         speed.x = (2*x + 200) / 25
-        #Velocidad en x
+        # Velocidad en x
         speed.y = (2*y + 200) / 25
-        #Velocidad en y
+        # Velocidad en y
 
 # Confirma que algo está dentro del rango de pantalla
 def inside(xy):
-    #Verifica que los objetivos se encuentren en la pantalla
     "Return True if xy within screen."
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
 # Parte del código que inicia a dibujar los objetivos
 def draw():
-    #Dibujar la pelota y objetivos
     "Draw ball and targets."
     clear()
     # Dibujar nuevas bolas azules
     for target in targets:
-        #Tamaño y color de los objetivos
+        # Tamaño y color de los objetivos
         goto(target.x, target.y)
         dot(20, 'blue')
     # Desaparecer objetivo en caso de  "atinarle",
     # es decir, ocupar el mismo espacio de pantalla
     if inside(ball):
-        #Tamaño y color de la pelota
         goto(ball.x, ball.y)
         dot(6, 'red')
 
@@ -69,25 +59,24 @@ def draw():
 # pero diferente altura)
 def move():
     "Move ball and targets."
-    if randrange(40) == 0:
-        #Movimiento aleatorio de los objetivos
+    if randrange(40) == 0: # Cada que se cumpla esta condición  en la
+        # aleatoriedad aparece una pelota
         y = randrange(-150, 150)
         target = vector(200, y)
         targets.append(target)
 
     for target in targets:
-        #Movimiento de los objetivos hacia la izquierda
+        # Movimiento de los objetivos hacia la izquierda
         target.x -= 0.5
     
-    # Velocidad a la que mueven los objetivos
+    # Velocidad a la que mueve la pelota
     if inside(ball):
-        #Movimiento de la pelota
         speed.y -= 0.35
         ball.move(speed)
 
     dupe = targets.copy()
-    #genera más objetivos
-    targets.clear()
+   
+    targets.clear()  # Genera más objetivos
 
     for target in dupe:
         # Movimiento de los objetivos
@@ -97,20 +86,18 @@ def move():
     draw()
 
     for target in targets:
-        #Los objetivos se detienen
-        #al llegar al extremo de la ventana
+        # Los objetivos reaparecen al salir de la ventana
         if not inside(target):
             goto(target.x, target.y)
 
-    ontimer(move, 25)
-    #Velocidad de los objetivos
+    ontimer(move, 25) # Velocidad a la que ocurre todo
 
-setup(420, 420, 370, 0)
-hideturtle()
-up()
-tracer(False)
-onscreenclick(tap)
-move()
+setup(420, 420, 370, 0) # Preparación
+hideturtle() # No mostrar biblioteca
+up() # Función
+tracer(False) # Verificar funcionamiento
+onscreenclick(tap) # Definir tap cuando se da click a la pantalla
+move() # Movimiento
 done()
 
 # Final
